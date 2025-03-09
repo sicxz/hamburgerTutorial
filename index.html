@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS-Only Hamburger Menu Tutorial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">CSS Hamburger</div>
+            
+            <!-- The checkbox hack -->
+            <input type="checkbox" id="menu-toggle">
+            
+            <!-- Hamburger icon label -->
+            <label for="menu-toggle" class="menu-button">
+                <span class="hamburger"></span>
+            </label>
+            
+            <!-- Navigation menu -->
+            <ul class="nav-menu">
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#demo">Live Demo</a></li>
+                <li><a href="#tutorial">Tutorial</a></li>
+                <li><a href="#code">Full Code</a></li>
+                <li><a href="#resources">Resources</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <main>
+        <section id="intro">
+            <h1>CSS-Only Hamburger Menu Tutorial</h1>
+            <p>Learn how to create a responsive hamburger navigation menu using only HTML and CSS—no JavaScript required!</p>
+            
+            <div class="highlight">
+                <strong>Why no JavaScript?</strong> While JavaScript can make interactive elements more powerful, CSS-only solutions are:
+                <ul>
+                    <li>Faster to load and execute</li>
+                    <li>Less prone to bugs and compatibility issues</li>
+                    <li>More accessible when JavaScript is disabled</li>
+                    <li>Often simpler to implement and maintain</li>
+                </ul>
+            </div>
+            
+            <p>This tutorial will teach you how to create a hamburger menu that transforms into an "X" when opened, with a smooth sliding animation—all without writing a single line of JavaScript.</p>
+        </section>
+        
+        <section class="demo-section" id="demo">
+            <h2>See It In Action</h2>
+            <p>This website itself uses the CSS-only hamburger menu we're teaching! Try resizing your browser window to under 768px width, or view on a mobile device to see it transform into a hamburger menu.</p>
+            <p>Click the hamburger icon to open the menu and see how it smoothly slides in and transforms.</p>
+            <a href="#tutorial" class="button">Learn How To Build It</a>
+        </section>
+        
+        <section id="tutorial">
+            <h2>Step-by-Step Tutorial</h2>
+            <p>Let's build a hamburger menu from scratch using only HTML and CSS:</p>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <h3>Set up the HTML Structure</h3>
+                    <p>First, let's create the basic HTML structure for our page:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">HTML</span>
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;CSS-Only Hamburger Menu&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;div class="nav-container"&gt;
+            &lt;div class="logo"&gt;MyWebsite&lt;/div&gt;
+            
+            &lt;!-- Navigation will go here --&gt;
+            
+        &lt;/div&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;h1&gt;CSS-Only Hamburger Menu&lt;/h1&gt;
+        &lt;p&gt;Resize the browser to see the hamburger menu in action.&lt;/p&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h3>Add the Navigation Elements</h3>
+                    <p>Now, let's add the key components of our hamburger menu:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">HTML</span>
+                        <pre><code>&lt;header&gt;
+    &lt;div class="nav-container"&gt;
+        &lt;div class="logo"&gt;MyWebsite&lt;/div&gt;
+        
+        &lt;!-- The checkbox hack - this is the core of our JavaScript-free solution --&gt;
+        &lt;input type="checkbox" id="menu-toggle"&gt;
+        
+        &lt;!-- Hamburger icon as a label --&gt;
+        &lt;label for="menu-toggle" class="menu-button"&gt;
+            &lt;span class="hamburger"&gt;&lt;/span&gt;
+        &lt;/label&gt;
+        
+        &lt;!-- Navigation menu --&gt;
+        &lt;ul class="nav-menu"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+                    </div>
+                    
+                    <p>The key elements are:</p>
+                    <ul>
+                        <li>A hidden checkbox (<code>#menu-toggle</code>)</li>
+                        <li>A label with the hamburger icon that will toggle the checkbox</li>
+                        <li>The navigation menu that will be shown/hidden</li>
+                    </ul>
+                </div>
+                
+                <div class="step">
+                    <h3>Style the Base Elements</h3>
+                    <p>Let's create the basic CSS styles:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">CSS</span>
+                        <pre><code>/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Header and navigation container */
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: relative;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Hide the checkbox */
+#menu-toggle {
+    display: none;
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h3>Create the Hamburger Icon</h3>
+                    <p>Now, let's create the hamburger icon using CSS:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">CSS</span>
+                        <pre><code>/* Styling for the hamburger icon */
+.menu-button {
+    display: none; /* Hidden on desktop */
+    cursor: pointer;
+}
+
+.hamburger {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Creating the top and bottom lines of the hamburger */
+.hamburger::before,
+.hamburger::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}</code></pre>
+                    </div>
+                    
+                    <p>Here, we're using a single span element with <code>::before</code> and <code>::after</code> pseudo-elements to create the three lines of the hamburger icon.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Style the Navigation Menu</h3>
+                    <p>Let's style our navigation menu for the desktop view:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">CSS</span>
+                        <pre><code>/* Navigation menu styles */
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 1.5rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #ff9900;
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h3>Add the Responsive Styles</h3>
+                    <p>Now, let's create the mobile styles using media queries:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">CSS</span>
+                        <pre><code>/* Responsive styles */
+@media (max-width: 768px) {
+    .menu-button {
+        display: block; /* Show hamburger on mobile */
+        z-index: 999;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hide off-screen initially */
+        width: 250px;
+        height: 100vh;
+        background-color: #222;
+        flex-direction: column;
+        padding: 80px 0 30px 0;
+        transition: right 0.3s ease;
+        z-index: 998;
+    }
+    
+    .nav-menu li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #444;
+    }
+}</code></pre>
+                    </div>
+                    
+                    <p>These styles will transform our horizontal desktop menu into a vertical mobile menu that's positioned off-screen to the right.</p>
+                </div>
+                
+                <div class="step">
+                    <h3>Implement the Checkbox Hack</h3>
+                    <p>Finally, let's add the CSS that makes the menu toggle work without JavaScript:</p>
+                    
+                    <div class="code-container">
+                        <span class="code-label">CSS</span>
+                        <pre><code>@media (max-width: 768px) {
+    /* Previous mobile styles... */
+    
+    /* The magic: when checkbox is checked, show the menu */
+    #menu-toggle:checked ~ .nav-menu {
+        right: 0;
+    }
+    
+    /* Animate hamburger to X when menu is open */
+    #menu-toggle:checked ~ .menu-button .hamburger {
+        background-color: transparent;
+    }
+    
+    #menu-toggle:checked ~ .menu-button .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+    
+    #menu-toggle:checked ~ .menu-button .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+    }
+}</code></pre>
+                    </div>
+                    
+                    <p>This is the key part of our solution. When the checkbox is checked:</p>
+                    <ol>
+                        <li>The menu slides in from the right (changing <code>right: -100%</code> to <code>right: 0</code>)</li>
+                        <li>The hamburger icon transforms into an X by:
+                            <ul>
+                                <li>Making the middle line invisible</li>
+                                <li>Rotating the top and bottom lines to form an X</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="step">
+                    <h3>Test and Refine</h3>
+                    <p>Now it's time to test your menu! Resize your browser window to see how it transforms from a horizontal desktop menu to a hamburger menu on mobile.</p>
+                    <p>You can adjust the following to customize your menu:</p>
+                    <ul>
+                        <li><strong>Menu width:</strong> Change the <code>width</code> value of <code>.nav-menu</code></li>
+                        <li><strong>Animation speed:</strong> Modify the <code>transition</code> timing</li>
+                        <li><strong>Colors:</strong> Update the background and text colors</li>
+                        <li><strong>Breakpoint:</strong> Change the <code>max-width</code> value in the media query</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="code">
+            <h2>Complete Code</h2>
+            <p>Here's the complete HTML and CSS code for the hamburger menu:</p>
+            
+            <div class="code-container">
+                <span class="code-label">HTML</span>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;CSS-Only Hamburger Menu&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;div class="nav-container"&gt;
+            &lt;div class="logo"&gt;MyWebsite&lt;/div&gt;
+            
+            &lt;!-- The checkbox hack --&gt;
+            &lt;input type="checkbox" id="menu-toggle"&gt;
+            
+            &lt;!-- Hamburger icon label --&gt;
+            &lt;label for="menu-toggle" class="menu-button"&gt;
+                &lt;span class="hamburger"&gt;&lt;/span&gt;
+            &lt;/label&gt;
+            
+            &lt;!-- Navigation menu --&gt;
+            &lt;ul class="nav-menu"&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Services&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;h1&gt;CSS-Only Hamburger Menu&lt;/h1&gt;
+        &lt;p&gt;Resize the browser to see the hamburger menu in action.&lt;/p&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+            
+            <div class="code-container">
+                <span class="code-label">CSS</span>
+                <pre><code>/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Header and navigation container */
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: relative;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* The checkbox hack - hidden but functional */
+#menu-toggle {
+    display: none;
+}
+
+/* Styling for the hamburger icon */
+.menu-button {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    bottom: -8px;
+}
+
+/* Navigation menu styles */
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 1.5rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #ff9900;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .menu-button {
+        display: block;
+        z-index: 999;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: #222;
+        flex-direction: column;
+        padding: 80px 0 30px 0;
+        transition: right 0.3s ease;
+        z-index: 998;
+    }
+    
+    .nav-menu li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-menu a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid #444;
+    }
+    
+    /* The magic: when checkbox is checked, show the menu */
+    #menu-toggle:checked ~ .nav-menu {
+        right: 0;
+    }
+    
+    /* Animate hamburger to X when menu is open */
+    #menu-toggle:checked ~ .menu-button .hamburger {
+        background-color: transparent;
+    }
+    
+    #menu-toggle:checked ~ .menu-button .hamburger::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+    
+    #menu-toggle:checked ~ .menu-button .hamburger::after {
+        transform: rotate(-45deg);
+        bottom: 0;
+    }
+}</code></pre>
+            </div>
+        </section>
+        
+        <section id="how-it-works">
+            <h2>How It Works</h2>
+            <p>Let's break down how this CSS-only hamburger menu works:</p>
+            
+            <h3>The Checkbox Hack</h3>
+            <p>The core of this solution is the "checkbox hack" - a technique that uses a hidden checkbox input element and its <code>:checked</code> state to create toggle functionality without JavaScript.</p>
+            
+            <h3>Key Components</h3>
+            <ol>
+                <li><strong>Hidden Checkbox:</strong> The <code>#menu-toggle</code> input is hidden with <code>display: none</code>, but it's still functional.</li>
+                <li><strong>Label as Trigger:</strong> The <code>label</code> element is associated with the checkbox via the <code>for</code> attribute, allowing it to toggle the checkbox when clicked.</li>
+                <li><strong>CSS Selectors:</strong> We use the <code>#menu-toggle:checked</code> selector to detect when the checkbox is checked, and the general sibling combinator (<code>~</code>) to target elements that follow the checkbox.</li>
+                <li><strong>Transitions:</strong> CSS transitions create smooth animations for the menu sliding in/out and the hamburger-to-X transformation.</li>
+            </ol>
+            
+            <h3>The Magic Selector</h3>
+            <p>The most important part of the code is this selector:</p>
+            <pre><code>#menu-toggle:checked ~ .nav-menu</code></pre>
+            <p>This means: "When the checkbox with ID 'menu-toggle' is checked, apply these styles to its sibling element with class 'nav-menu'."</p>
+        </section>
+        
+        <section id="resources">
+            <h2>Additional Resources</h2>
+            <ul>
+                <li><strong>CSS Tricks:</strong> <a href="https://css-tricks.com/the-checkbox-hack/" target="_blank">The Checkbox Hack</a></li>
+                <li><strong>MDN Web Docs:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:checked" target="_blank">:checked Pseudo-class</a></li>
+                <li><strong>MDN Web Docs:</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions" target="_blank">Using CSS Transitions</a></li>
+                <li><strong>CSS Tricks:</strong> <a href="https://css-tricks.com/three-line-menu-navicon/" target="_blank">The Three Line Menu</a></li>
